@@ -1,0 +1,26 @@
+<html>
+<title>Poppy Humanoid interactive configuration creation</title>
+
+<head>
+<link rel="stylesheet" type="text/css" href="../poppy-web-style.css">
+</head>
+
+<body>
+ <form action="/index.html">
+<input type="submit" value="Back to menu">
+</form> 
+
+<div id="maindiv">
+<form method=POST action="../cgi-bin/cgi_create_config_file.py">
+    <p><B>Check the parts of the Poppy Humanoid robot that will be in the configuration file:</B></p>
+     <p><INPUT type="checkbox" name="head" value="head">Head</p>
+     <p><INPUT type="checkbox" name="torso" value="torso">Torso</p>
+     <p><INPUT type="checkbox" name="rarm" value="torso">Right Arm</p>
+     <p><INPUT type="checkbox" name="larm" value="torso">Left Arm</p>
+     <p><INPUT type="checkbox" name="rleg" value="torso">Right Leg</p>
+     <p><INPUT type="checkbox" name="lleg" value="torso">Left Leg</p>
+     <!--<p><input type=text name=user></p>-->
+     <p><input type=submit value="Create configuration file"></p>
+</form>
+</div>
+</body></html>

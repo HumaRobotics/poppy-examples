@@ -1,0 +1,32 @@
+body{
+
+}
+
+#maindiv {
+font-family: Georgia;
+padding:2px 0px 10px 0px;
+
+}
+
+div{
+  background-color:#82C9ED;
+color:white;
+font-size:1.2em;
+}
+
+h1{
+margin-left: auto;
+  margin-right: auto;
+  width: 1000px;
+}
+
+p{
+margin-left: auto;
+  margin-right: auto;
+  width: 1000px;
+}
+
+a{
+font-weight: bold;
+color:#1F5F98;
+}
