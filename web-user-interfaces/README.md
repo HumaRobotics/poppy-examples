@@ -1,7 +1,7 @@
 # web-user-interfaces
 Some useful graphical tools based on a python webserver
 Tested with Ubuntu 14.04, python2.7 and firefox
-Warning: I have begiinner level in web technologies, so code may be strange or inefficient. Remarks welcome.
+Warning: I have beginner level in web technologies, so code may be strange or inefficient. Remarks welcome.
 
 #How to use
 - If you don't run this from the Odroid, connect your Poppy robot to your computer

@@ -411,38 +411,35 @@ if "lleg" in parts and "rleg" in parts:
       "r_leg"
     ]
     
-    poppy_config['controllers'] = {
-        "lower_body_controller": {
+    poppy_config['controllers']["lower_body_controller"] = {
         "sync_read": True,
         "attached_motors": [
         "legs"
         ],
         "port": "auto"
         }
-    }
+    
     
 else:
     if "lleg" in parts:
-        poppy_config['controllers'] = {
-        "lower_body_controller": {
+        poppy_config['controllers']["lower_body_controller"] = {
         "sync_read": True,
         "attached_motors": [
         "l_leg"
         ],
         "port": "auto"
         }
-    }
+    
     
     if "rleg" in parts:
-        poppy_config['controllers'] = {
-        "lower_body_controller": {
+        poppy_config['controllers']["lower_body_controller"] = {
         "sync_read": True,
         "attached_motors": [
         "r_leg"
         ],
         "port": "auto"
         }
-    }
+    
 
 import json
 #~ poppy_config['controllers']['lower_body_controller']['port'] = "auto"

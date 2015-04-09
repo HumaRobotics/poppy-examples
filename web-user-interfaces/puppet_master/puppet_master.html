@@ -1,0 +1,45 @@
+<html>
+<title>Poppy Humanoid puppet master</title>
+
+<head>
+<link rel="stylesheet" type="text/css" href="../poppy-web-style.css">
+</head>
+
+<style>
+#motornamingconvention {
+position:relative;
+  margin-left: auto;
+  margin-right: auto;
+  width: 1000px;
+  }
+  
+ .motorinput {
+position:absolute;
+  }
+</style>
+
+<body>
+
+<body>
+ <form action="/index.html">
+<input type="submit" value="Back to menu">
+</form> 
+
+<div id="maindiv">
+
+<div   >
+<form method=POST  action="../cgi-bin/cgi_puppet_master.py">
+<input type=submit name="stand" value="stand" />
+<input type=submit name="none" value="none" />
+</form>
+</div>
+
+<div id="motornamingconvention"  >
+<form method=POST  action="../cgi-bin/cgi_puppet_master.py">
+
+<img src="../puppet_master/motor_naming_convention.jpg" height="600px"></img>
+TO_REPLACE
+</form>
+</div>
+</div>
+</body></html>
