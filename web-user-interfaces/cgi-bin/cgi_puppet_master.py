@@ -36,7 +36,7 @@ def changeCompliance(poppy, form):
             m.compliant = False
             m.goal_position=0
         return
-    if "none" in form.keys():
+    if "compliant" in form.keys():
         for m in poppy.motors:
             m.compliant = True
         return
@@ -106,6 +106,10 @@ def displayWebpage(toPrint):
     print(html_list[0]+toPrint+html_list[1])
 
 
+
+
+#####################3
+
 form = cgi.FieldStorage() 
 poppy = createPoppyCreature()
 
@@ -117,4 +121,4 @@ else:
     toPrint += createButtons(poppy)
 displayWebpage(toPrint)
 
-time.sleep(0.1)
+time.sleep(0.1) #otherwise compliance is not applied
