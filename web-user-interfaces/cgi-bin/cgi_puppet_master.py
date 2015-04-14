@@ -3,11 +3,12 @@ import cgi
 
 import json, time
 import pypot.robot
+from pypot.primitive.move import Move
 
 
 
-
-
+poppy_config_file = './puppet_master/poppy_custom_config.json'
+saved_positions_file = './puppet_master/saved_positions.json'
 
 
 
@@ -17,9 +18,8 @@ def createPoppyCreature():
     try:
         from poppy_humanoid import PoppyHumanoid
         poppy = PoppyHumanoid()
-    #~ except Exception,e:
     #~ try:
-        #~ poppy_config_file = './puppet_master/poppy_custom_config.json'
+        
         #~ with open(poppy_config_file) as f:
             #~ poppy_config = json.load(f)  
         #~ poppy = pypot.robot.from_config(poppy_config)
@@ -29,6 +29,44 @@ def createPoppyCreature():
         print e
         
     return poppy
+  
+def openFile():
+    savedPositions = None
+    try:
+        with open(saved_positions_file ) as f:
+            savedPositions = Move.load(f)
+            savedPositions = savedPositions._positions
+    except:
+        savedPositions = []
+        
+    return savedPositions
+    
+  
+def savePosition(poppy, form, savedPositions):
+    name = form["saveposinput"].value
+    position = {"name":name}
+    for m in poppy.motors:
+        position[m.name] = m.present_position
+    savedPositions.append(position)
+    move = Move(0.)
+    move._positions = savedPositions
+    with open(saved_positions_file, 'w') as f:
+        move.save(f)
+    
+ 
+def setPosition(poppy, position):
+    for m in poppy.motors:
+        if  m.name in  position.keys():
+            m.compliant = False
+            m.goal_position = position[m.name]
+    
+def goToPosition(poppy, form, savedPositions):
+    name = form["gotoposinput"].value
+    for p in savedPositions:
+        print p["name"]
+        if p["name"] == name:
+            setPosition(poppy, p)
+            return
     
 def changeCompliance(poppy, form):
     if "stand" in form.keys():
@@ -60,7 +98,7 @@ def createButtons(poppy):
     "r_shoulder_y":[0.06,0.19],
     "r_shoulder_x":[0.06,0.26],
     "r_arm_z":[0.06,0.32],
-    "r_elbow":[0.06,0.39],
+    "r_elbow_y":[0.06,0.39],
     "bust_x":[0.55,0.29],
     "bust_y":[0.36,0.33],
     "abs_z":[0.57,0.37],
@@ -81,7 +119,7 @@ def createButtons(poppy):
     for m in poppy.motors:
         if m.name in motors_positions:
             toPrint += "<p><input type=submit name=\""+m.name+"\" value=\""+m.name+"\" class=\"motorinput\""
-            toPrint  +=" style=\"left: "+str(int(motors_positions[m.name][0]*img_width))+"px; top:"+str(int(motors_positions[m.name][1]*img_height))+"px;\n"
+            toPrint  +=" style=\"left: "+str(int(motors_positions[m.name][0]*img_width))+"px; top:"+str(30+int(motors_positions[m.name][1]*img_height))+"px;\n"
             if m.compliant:
                 toPrint  += "color:green;"
             else:
@@ -90,9 +128,13 @@ def createButtons(poppy):
         
     return toPrint
 
-
+def createSavedPosOptions(savedPositions):
+    toPrint = ""
+    for p in savedPositions:
+        toPrint += "<OPTION>"+p["name"]+"\n"
+    return toPrint
     
-def displayWebpage(toPrint):
+def displayWebpage(toPrint, toPrint2):
     
     print('Content-type: text/html\n')        # hdr plus blank line
     print('<title>Poppy Humanoid puppet master</title>')        # html reply page
@@ -103,22 +145,29 @@ def displayWebpage(toPrint):
 
     html_list = html_file.split("TO_REPLACE")
     
-    print(html_list[0]+toPrint+html_list[1])
+    print(html_list[0]+toPrint+html_list[1]+toPrint2+html_list[2])
 
 
-
-
-#####################3
+#####################
 
 form = cgi.FieldStorage() 
 poppy = createPoppyCreature()
+savedPositions = openFile()
 
-toPrint=""
+toPrint="" #buttons on the poppy humanoid image or error message
+toPrint2 = "" #list of saved positions
 if poppy is None:
     toPrint += "<p>ERROR, could not create poppy creature. Please check that all your motors are plugged and powered.</p>\n"
 else:
-    changeCompliance(poppy, form)
+    if "savepos" in form:
+        savePosition(poppy, form, savedPositions)
+    elif "gotopos" in form:
+        goToPosition(poppy, form, savedPositions)
+    else:
+        changeCompliance(poppy, form)
     toPrint += createButtons(poppy)
-displayWebpage(toPrint)
+    toPrint2 = createSavedPosOptions(savedPositions)
+    
+displayWebpage(toPrint, toPrint2)
 
 time.sleep(0.1) #otherwise compliance is not applied

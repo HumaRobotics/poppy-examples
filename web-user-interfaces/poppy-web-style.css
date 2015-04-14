@@ -5,11 +5,13 @@ body{
 #maindiv {
 font-family: Georgia;
 padding:2px 0px 10px 0px;
-
+  margin-left: auto;
+  margin-right: auto;
+background-color:#82C9ED;
 }
 
 div{
-  background-color:#82C9ED;
+
 color:white;
 font-size:1.2em;
 }
@@ -29,4 +31,9 @@ margin-left: auto;
 a{
 font-weight: bold;
 color:#1F5F98;
+}
+
+img{
+	margin:10px;
+
 }

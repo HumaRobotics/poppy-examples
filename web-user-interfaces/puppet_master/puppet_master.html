@@ -8,17 +8,26 @@
 <style>
 #motornamingconvention {
 position:relative;
-  margin-left: auto;
-  margin-right: auto;
-  width: 1000px;
+float:left;
+width:500px;
   }
   
  .motorinput {
 position:absolute;
   }
-</style>
+  
+  #buttonsdiv{
+height:650px;
+padding:10px;
+margin-left:500px;
+  }
+  
+  #buttonsdiv p{
+  margin-left: 20px;
+  width: auto;
+  }
 
-<body>
+</style>
 
 <body>
  <form action="/index.html">
@@ -27,19 +36,24 @@ position:absolute;
 
 <div id="maindiv">
 
-<div   >
+<div id="motornamingconvention" >
 <form method=POST  action="../cgi-bin/cgi_puppet_master.py">
-<input type=submit name="stand" value="stand" />
-<input type=submit name="compliant" value="compliant" />
-</form>
-</div>
-
-<div id="motornamingconvention"  >
-<form method=POST  action="../cgi-bin/cgi_puppet_master.py">
-
-<img src="../puppet_master/motor_naming_convention.jpg" height="600px"></img>
 TO_REPLACE
+<img src="../puppet_master/motor_naming_convention.jpg" height="600px"></img>
+
 </form>
 </div>
+
+<div id="buttonsdiv">
+<form method=POST  action="../cgi-bin/cgi_puppet_master.py">
+<p><input type=submit name="stand" value="stand" /></p>
+<p><input type=submit name="compliant" value="compliant" /></p>
+<p><SELECT name="gotoposinput" size="1">
+TO_REPLACE
+</SELECT><input type=submit name="gotopos" value="go to position" /></p>
+<p><input type=input name="saveposinput"  /><input type=submit name="savepos" value="save position" /></p>
+</form>
+</div>
+
 </div>
 </body></html>
