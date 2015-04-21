@@ -1,7 +1,7 @@
 #!/usr/bin/python
 import cgi
 
-import json, time
+import json, time, sys
 import pypot.robot
 from pypot.primitive.move import Move
 
@@ -26,7 +26,8 @@ def createPoppyCreature():
         #~ poppy.start_sync()
     except Exception,e:
         print "could not create poppy object"
-        print e
+        print >> sys.stderr, e
+        #~ print e
         
     return poppy
   
