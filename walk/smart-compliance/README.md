@@ -7,7 +7,7 @@ Use the smart-compliance.py file to record positions directly on your robot.
 This will make the robot not compliant but it will adapt its position if you try to make it move.
 
 Code output should look like:
-```python
+```bash
 python smart-compliance.py 
 
 position name (or stop): mypos1
