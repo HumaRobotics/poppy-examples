@@ -47,6 +47,7 @@ def readSavedPositions():
             savedPositions = Move.load(f)
             savedPositions = savedPositions._positions
     except:
+        print "could not read file"
         savedPositions = []
         
     return savedPositions
@@ -74,16 +75,21 @@ poppy = createPoppyCreature()
 
 initPos(poppy)
 
+
+time.sleep(3)
+
+
 #walk initialization
 init = ["init", "right1"]
 # full step = move right foot then move left foot
 positions = ["right2", "both1", "both2", "left1", "left2", "both3", "both4", "right3"]
+#~ positions = ["right2",  "left1", "left2", "left3",  "right0"]
 #walk termination
 stop = ["right1", "init"]
 
 
 numberOfFullStep = 10 
-timeForFullStep = 6. #in seconds
+timeForFullStep =3. #in seconds
 timeByMove = timeForFullStep /len(positions)
 
 for p in init:

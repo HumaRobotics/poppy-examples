@@ -60,14 +60,14 @@
         "torso", 
         "arms"
       ], 
-      "port": "/dev/ttyACM1"
+      "port": "auto"
     }, 
     "lower_body_controller": {
       "sync_read": true, 
       "attached_motors": [
         "legs"
       ], 
-      "port": "/dev/ttyACM0"
+      "port": "auto"
     }
   }, 
   "motors": {

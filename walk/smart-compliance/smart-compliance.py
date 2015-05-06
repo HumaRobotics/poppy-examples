@@ -38,15 +38,15 @@ def keypress():
 ################
 
 poppy_config_file = 'poppy_custom_config.json'
-saved_positions_file = 'saved_walk_positions.json'
+saved_positions_file = 'saved-walk-positions.json'
 
 
 def createPoppyCreature():
     poppy = None
 
-    #~ try:
-        #~ from poppy_humanoid import PoppyHumanoid
-        #~ poppy = PoppyHumanoid()
+    #try:
+     #   from poppy_humanoid import PoppyHumanoid
+      #  poppy = PoppyHumanoid()
     try:
         
         with open(poppy_config_file) as f:
@@ -66,6 +66,7 @@ def readSavedPositions():
             savedPositions = Move.load(f)
             savedPositions = savedPositions._positions
     except:
+        print "could not read file"
         savedPositions = []
         
     return savedPositions
@@ -135,6 +136,8 @@ if len(all_poses) == 0:
     previous_pos = {}
     for m in controlled_motors:
         previous_pos[m.name] = 0.0
+else:
+	previous_pos = all_poses[0]
 setPosition(poppy, previous_pos, 1)
 
 #ask for the name of next position
