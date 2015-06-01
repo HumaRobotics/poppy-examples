@@ -37,22 +37,22 @@ def keypress():
 # json file where positios will be saved
 ################
 
-poppy_config_file = 'poppy_custom_config.json'
+#~ poppy_config_file = 'poppy_custom_config.json'
 saved_positions_file = 'saved-walk-positions.json'
 
 
 def createPoppyCreature():
     poppy = None
 
-    #try:
-     #   from poppy_humanoid import PoppyHumanoid
-      #  poppy = PoppyHumanoid()
     try:
+        from poppy_humanoid import PoppyHumanoid
+        poppy = PoppyHumanoid()
+    #~ try:
         
-        with open(poppy_config_file) as f:
-            poppy_config = json.load(f)  
-        poppy = pypot.robot.from_config(poppy_config)
-        poppy.start_sync()
+        #~ with open(poppy_config_file) as f:
+            #~ poppy_config = json.load(f)  
+        #~ poppy = pypot.robot.from_config(poppy_config)
+        #~ poppy.start_sync()
     except Exception,e:
         print "could not create poppy object"
         print e
